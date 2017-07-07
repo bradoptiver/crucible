@@ -86,6 +86,8 @@ Should the module install Java? (default: true)
 Where should crucible be installed? (default: '/opt/crucible')
 #### `fisheye_inst`
 Where should crucible's data be stored? (default: '/opt/crucible-data')
+#### `fisheye_opts`
+Specify extra arguments to java (default: '')
 #### `service_user`
 What user should the service run under? (default: crucible)
 #### `install_unzip`

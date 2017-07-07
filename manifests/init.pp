@@ -8,6 +8,7 @@ class crucible (
   $install_java = true,
   $install_dir = '/opt/crucible',
   $fisheye_inst = '/opt/crucible-data',
+  $fisheye_opts = '',
   $install_unzip = true,
   $install_wget = true,
   $download_url = 'https://www.atlassian.com/software/crucible/downloads/binary',

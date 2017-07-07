@@ -2,10 +2,20 @@ class crucible::service inherits crucible {
 
   if $crucible::service_manage == true {
 
-    file { '/etc/init.d/crucible':
+    if $facts['service_provider'] == 'systemd' {
+      $init_file='/etc/systemd/crucible.service'
+      $init_template='crucible.service.erb'
+      $init_perms='0664'
+    } else {
+      $init_file='/etc/init.d/crucible'
+      $init_file_template='crucible-init.sh.erb'
+      $init_perms='0755'
+    }
+
+    file { $init_file:
       ensure  => file,
-      content => template('crucible/crucible-init.sh.erb'),
-      mode    => '0755',
+      content => template("crucible/${init_template}"),
+      mode    => $init_perms,
     }
 
     service { 'crucible':
@@ -14,8 +24,7 @@ class crucible::service inherits crucible {
       name       => $crucible::service_name,
       hasstatus  => true,
       hasrestart => true,
-      require    => File['/etc/init.d/crucible'],
+      require    => File[$init_file],
     }
   }
-
 }
