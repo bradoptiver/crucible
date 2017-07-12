@@ -8,7 +8,7 @@ class crucible::service inherits crucible {
       $init_perms='0664'
     } else {
       $init_file='/etc/init.d/crucible'
-      $init_file_template='crucible-init.sh.erb'
+      $init_template='crucible-init.sh.erb'
       $init_perms='0755'
     }
 
