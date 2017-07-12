@@ -1,0 +1,23 @@
+[Unit]
+Description=Crucible service
+Before=runlevel2.target runlevel3.target runlevel4.target runlevel5.target
+After=network-online.target network.service
+
+[Service]
+User=crucible
+Environment=FISHEYE_HOME=<%= @install_dir %>
+Environment=FISHEYE_INST=<%= @fisheye_inst %>
+Environment="FISHEYE_OPTS=<%= @fisheye_opts %>"
+
+Type=forking
+Restart=no
+TimeoutSec=5min
+IgnoreSIGPIPE=no
+KillMode=process
+GuessMainPID=no
+RemainAfterExit=yes
+ExecStart=<%= @install_dir %>/bin/fisheyectl.sh start
+ExecStop=<%= @install_dir %>/data/crucible/bin/fisheyectl.sh stop
+
+[Install]
+WantedBy=multi-user.target
